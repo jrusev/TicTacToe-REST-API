@@ -1,15 +1,20 @@
 <div class="container clearfix" ng-controller="ListGamesController">
-    <div class="container">        
-        <div class="row" ng-cloak ng-if="myGames">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#/game/create" class="btn btn-primary pull-right">Create a new game</a>
+            </div>
+        </div>
+        <div class="row" ng-cloak>
             <div class="col-md-offset-3 col-md-6">
                 <ul class="nav nav-tabs">
-                    <li ng-repeat="game in myGames" class="active">
+                    <li class="active">
                         <a href="#myGames" target="_self" data-toggle="tab">My games</a>
                     </li>
-                    <li ng-repeat="game in myGames">
+                    <li>
                         <a href="#availableGames" target="_self" data-toggle="tab">Available games</a>
                     </li>
-                    <li ng-repeat="game in myGames">
+                    <li>
                         <a href="#joinedGames" target="_self" data-toggle="tab">Joined games</a>
                     </li>
                 </ul>
