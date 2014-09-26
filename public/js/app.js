@@ -6,10 +6,10 @@ var ticTacToeApp = angular.module('myApp', ['ngResource', 'ngRoute'])
 
         $routeProvider
             .when('/', {
-                templateUrl: 'templates/list/games.html'
+                templateUrl: 'templates/games.html'
             })
             .when('/games/', {
-                templateUrl: 'templates/list/games.html'
+                templateUrl: 'templates/games.html'
             })
             .when('/game/create', {
                 templateUrl: 'templates/create-game.html'
@@ -18,10 +18,10 @@ var ticTacToeApp = angular.module('myApp', ['ngResource', 'ngRoute'])
                 templateUrl: 'templates/game-status.html'
             })
             .when('/scores/', {
-                templateUrl: 'templates/list/scores.html'
+                templateUrl: 'templates/scores.html'
             })
             .when('/users/', {
-                templateUrl: 'templates/list/users.html'
+                templateUrl: 'templates/users.html'
             })
             .when('/login', {
                 templateUrl: 'templates/auth/login.html'
