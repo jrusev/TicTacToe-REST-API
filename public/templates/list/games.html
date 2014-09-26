@@ -1,110 +1,93 @@
 <div class="container clearfix" ng-controller="ListGamesController">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 big-text">
-                <strong ng-if="myGames">Your games:</strong>
-            </div>
-            <div class="col-md-6">
-                <a href="#/game/create" class="btn btn-primary pull-right">Create a new game</a>
-            </div>
-        </div>
-
+    <div class="container">        
         <div class="row" ng-cloak ng-if="myGames">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Description</th>
-                            <th>Creator</th>
-                            <th>Created on</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="game in myGames">
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ game.Name }}</td>
-                            <td>{{ game.Creator }}</td>
-                            <td>{{ game.DateCreated | date : 'd MMM, HH:mm' }}</td>
-                            <td>{{ game.Status | gameStatusFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</td>
-                            <td><button class="btn btn-primary btn-sm" ng-click="playGame(game.Id)">Play</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-md-offset-3 col-md-6">
+                <ul class="nav nav-tabs">
+                    <li ng-repeat="game in myGames">
+                        <a href="#myGames" target="_self" data-toggle="tab">My games</a>
+                    </li>
+                    <li ng-repeat="game in myGames">
+                        <a href="#availableGames" target="_self" data-toggle="tab">Available games</a>
+                    </li>
+                    <li ng-repeat="game in myGames">
+                        <a href="#joinedGames" target="_self" data-toggle="tab">Joined games</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade" id="myGames">                        
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Created by</th>
+                                    <th>Date created</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="game in myGames">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ game.Name }}</td>
+                                    <td>{{ game.Creator }}</td>
+                                    <td>{{ game.DateCreated | date : 'd MMM, HH:mm' }}</td>
+                                    <td>{{ game.Status | gameStatusFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</td>
+                                    <td><button class="btn btn-primary btn-sm" ng-click="joinGame(game.Id)">Join</button></td>
+                                </tr>
+                            </tbody>
+                        </table>                        
+                    </div>
+                    <div class="tab-pane fade" id="availableGames">                        
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Created by</th>
+                                    <th>Date created</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="game in availableGames">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ game.Name }}</td>
+                                    <td>{{ game.Creator }}</td>
+                                    <td>{{ game.DateCreated | date : 'd MMM, HH:mm' }}</td>
+                                    <td>{{ game.Status | gameStatusFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</td>
+                                    <td><button class="btn btn-primary btn-sm" ng-click="joinGame(game.Id)">Join</button></td>
+                                </tr>
+                            </tbody>
+                        </table>                      
+                    </div>                    
+                    <div class="tab-pane fade" id="joinedGames">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Created by</th>
+                                    <th>Date created</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="game in joinedGames">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ game.Name }}</td>
+                                    <td>{{ game.Creator }}</td>
+                                    <td>{{ game.DateCreated | date : 'd MMM, HH:mm' }}</td>
+                                    <td>{{ game.Status | gameStatusFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</td>
+                                    <td><button class="btn btn-primary btn-sm" ng-click="playGame(game.Id)">Play</button></td>
+                                </tr>
+                            </tbody>
+                        </table>                               
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="row" ng-if="joinedGames">
-            <div class="col-md-6 big-text">
-                <strong>Joined games:</strong>
-            </div>
-        </div>
-
-        <div class="row" ng-cloak ng-if="joinedGames">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Description</th>
-                            <th>Creator</th>
-                            <th>Created on</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="game in joinedGames">
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ game.Name }}</td>
-                            <td>{{ game.Creator }}</td>
-                            <td>{{ game.DateCreated | date : 'd MMM, HH:mm' }}</td>
-                            <td>{{ game.Status | gameStatusFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</td>
-                            <td><button class="btn btn-primary btn-sm" ng-click="playGame(game.Id)">Play</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-
-        <div class="row" ng-if="availableGames">
-            <div class="col-md-6 big-text">
-                <strong>Available games:</strong>
-            </div>
-        </div>
-
-        <div class="row" ng-cloak ng-if="availableGames">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Description</th>
-                            <th>Creator</th>
-                            <th>Created on</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="game in availableGames">
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ game.Name }}</td>
-                            <td>{{ game.Creator }}</td>
-                            <td>{{ game.DateCreated | date : 'd MMM, HH:mm' }}</td>
-                            <td>{{ game.Status | gameStatusFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</td>
-                            <td><button class="btn btn-primary btn-sm" ng-click="joinGame(game.Id)">Join</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
+        </div> 
     </div>
 </div>

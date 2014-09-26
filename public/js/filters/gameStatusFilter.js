@@ -28,7 +28,7 @@ ticTacToeApp.filter('gameStatusFilter', function () {
             case 3:
             {
                 if (status.firstPlayerName === status.currentPlayerName) {
-                    return "Victory"
+                    return "Win"
                 }
                 else {
                     return "Loss";
@@ -40,7 +40,7 @@ ticTacToeApp.filter('gameStatusFilter', function () {
                     return "Loss"
                 }
                 else {
-                    return "Victory";
+                    return "Win";
                 }
             }
             case 5:

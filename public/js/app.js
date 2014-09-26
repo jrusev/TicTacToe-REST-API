@@ -1,6 +1,6 @@
 'use strict';
 
-var ticTacToeApp = angular.module('rockBandsApp', ['ngResource', 'ngRoute'])
+var ticTacToeApp = angular.module('myApp', ['ngResource', 'ngRoute'])
     .config(function ($routeProvider) {
         MobileDeviceChecker.hideFooterIfOnMobileDevice();
 
@@ -31,5 +31,5 @@ var ticTacToeApp = angular.module('rockBandsApp', ['ngResource', 'ngRoute'])
             })
             .otherwise({redirectTo: '/'});
     })
-    .constant('author', 'Martin Nikolov')
+    .constant('author', 'JR')
     .constant('copyright', 'Telerik Academy');
