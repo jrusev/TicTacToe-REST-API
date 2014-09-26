@@ -24,10 +24,10 @@ var ticTacToeApp = angular.module('myApp', ['ngResource', 'ngRoute'])
                 templateUrl: 'templates/users.html'
             })
             .when('/login', {
-                templateUrl: 'templates/auth/login.html'
+                templateUrl: 'templates/auth-login.html'
             })
             .when('/registration', {
-                templateUrl: 'templates/auth/registration.html'
+                templateUrl: 'templates/auth-registration.html'
             })
             .otherwise({redirectTo: '/'});
     })

@@ -1,21 +1,23 @@
 'use strict';
 
-ticTacToeApp.factory('ticTacToeData', function ($resource, $http, $q) {
+ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
     var url = 'http://tictactoe-services.azurewebsites.net/';
 
     //var url = 'http://localhost:4444/';
+    
+    function transformRequest(obj) {
+        var str = [];
+        for (var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join("&");
+    };
 
     function getGames(type, access_token) {
         var deferred = $q.defer();
 
         $http.get(url + 'api/Games/' + type,
             {
-                transformRequest: function (obj) {
-                    var str = [];
-                    for (var p in obj)
-                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                    return str.join("&");
-                },
+                transformRequest: transformRequest,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'authorization': 'Bearer ' + access_token
@@ -41,12 +43,7 @@ ticTacToeApp.factory('ticTacToeData', function ($resource, $http, $q) {
                     ConfirmPassword: password
                 },
                 {
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var p in obj)
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        return str.join("&");
-                    },
+                    transformRequest: transformRequest,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
@@ -69,12 +66,7 @@ ticTacToeApp.factory('ticTacToeData', function ($resource, $http, $q) {
                     grant_type: "password"
                 },
                 {
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var p in obj)
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        return str.join("&");
-                    },
+                    transformRequest: transformRequest,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
@@ -130,12 +122,7 @@ ticTacToeApp.factory('ticTacToeData', function ($resource, $http, $q) {
                     Name: gameName
                 },
                 {
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var p in obj)
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        return str.join("&");
-                    },
+                    transformRequest: transformRequest,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'authorization': 'Bearer ' + access_token
@@ -157,12 +144,7 @@ ticTacToeApp.factory('ticTacToeData', function ($resource, $http, $q) {
                     GameId: gameId
                 },
                 {
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var p in obj)
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        return str.join("&");
-                    },
+                    transformRequest: transformRequest,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'authorization': 'Bearer ' + access_token
@@ -184,12 +166,7 @@ ticTacToeApp.factory('ticTacToeData', function ($resource, $http, $q) {
                     GameId: gameId
                 },
                 {
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var p in obj)
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        return str.join("&");
-                    },
+                    transformRequest: transformRequest,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'authorization': 'Bearer ' + access_token
@@ -213,12 +190,7 @@ ticTacToeApp.factory('ticTacToeData', function ($resource, $http, $q) {
                     Col: col
                 },
                 {
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var p in obj)
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        return str.join("&");
-                    },
+                    transformRequest: transformRequest,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'authorization': 'Bearer ' + access_token
