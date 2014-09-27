@@ -1,7 +1,7 @@
 'use strict';
 
 ticTacToeApp.controller('RegistrationController',
-    function RegistrationController($rootScope, $scope, $resource, $location, ticTacToeData, auth) {
+    function RegistrationController($rootScope, $scope, $resource, $location, ticTacToeData, auth, notifier) {
         if (auth.isAuthenticated()) {
             $location.path('/');
             return;
@@ -12,6 +12,7 @@ ticTacToeApp.controller('RegistrationController',
         $scope.registration = function () {
             ticTacToeData.register($scope.username, $scope.password)
                 .then(function () {
+                    notifier.success('Registration successful!');
                     ticTacToeData.login($scope.username, $scope.password)
                         .then(function (data) {
                             auth.login(data.userName, data.access_token);

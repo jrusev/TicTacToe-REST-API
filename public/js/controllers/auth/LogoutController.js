@@ -1,7 +1,7 @@
 'use strict';
 
 ticTacToeApp.controller('LogoutController',
-    function LogoutController($rootScope, $scope, $resource, $location, ticTacToeData, auth) {
+    function LogoutController($rootScope, $scope, $resource, $location, ticTacToeData, auth, notifier) {
         if (!auth.isAuthenticated()) {
             $location.path('/');
             return;
@@ -10,6 +10,7 @@ ticTacToeApp.controller('LogoutController',
         $scope.logout = function () {            
             ticTacToeData.logout(auth.access_token())
                 .then(function () {
+                    notifier.success('Logout successful!');
                     auth.logout();                    
                     $rootScope.isLoggedIn = false;
                     $location.path('/login');                    

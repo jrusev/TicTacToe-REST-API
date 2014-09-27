@@ -1,15 +1,16 @@
 'use strict';
 
 ticTacToeApp.controller('CreateGameController',
-    function CreateGameController($scope, $location, ticTacToeData, auth) {
+    function CreateGameController($scope, $location, ticTacToeData, auth, notifier) {
         if (!auth.isAuthenticated()) {
             $location.path('/login');
             return;
         }
 
         $scope.createGame = function (gameName) {
-            ticTacToeData.createGame(gameName, auth.access_token())
+            ticTacToeData.createGame(gameName, auth.access_token())                
                 .then(function () {
+                    notifier.success('Game created!');
                     $location.path('/');
                 });
         };
