@@ -34,11 +34,7 @@ ticTacToeApp.controller('ListGamesController',
         ticTacToeData
             .getMyGames(auth.access_token())
             .then(function (data) {
-                $scope.myGames = [];
-                data.forEach(function(game) {
-                    if (game.Status >= 0 ) // WonByX, WonByO or Draw
-                        $scope.myGames.push(game);
-                });
+                $scope.allMyGames = $scope.allMyGames.concat(data);
             });
         
         ticTacToeData
