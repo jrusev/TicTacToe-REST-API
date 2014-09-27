@@ -33,7 +33,17 @@
                     <a href="#/login/">Login</a>
                 </li>
             </ul>
-
+            <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn">
+                <li class="dropdown">
+                    <a href="" data-toggle="dropdown" class="dropdown-toggle">{{ username }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="" ng-controller="LogoutController" ng-click="logout()">Sign Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>            
+<!--
             <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn">
                 <li>
                     <a class="href-btn">Hello, <strong>{{ username }}</strong></a>
@@ -41,7 +51,8 @@
                 <li>
                     <a href="" class="href-btn" ng-controller="LogoutController" ng-click="logout()">Sign out</a>
                 </li>
-            </ul>          
+            </ul>
+-->            
         </div>
     </div>
 </div>
