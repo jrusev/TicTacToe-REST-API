@@ -60,10 +60,10 @@ ticTacToeApp.controller('ListGamesController',
             $location.path('/game/' + gameId);
         };
         
-        $scope.playMyGame = function(gameId, status) {
-            if (status == 0)
+        $scope.playMyGame = function(gameId, status, creator) {
+            if (status == 0 && creator !== $scope.currentPlayer)
                 $scope.joinGame(gameId);
-            else
+            else if (status != 0)
                 $scope.playGame(gameId);
         };
     }

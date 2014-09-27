@@ -19,7 +19,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
+                                     <th>Name</th>
                                     <th>Created by</th>
                                     <th>Date created</th>
                                     <th>Status</th>
@@ -33,7 +33,7 @@
                                     <td>{{ game.Creator }}</td>
                                     <td>{{ game.DateCreated | date : 'd MMM, HH:mm' }}</td>
                                     <td>{{ game.Status | gameStatusFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</td>
-                                    <td><a href="" class="ios-btn" ng-click="playMyGame(game.Id, game.Status)">{{ game.Status | gameActionFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</a></td>
+                                    <td><a href="" class="ios-btn" ng-click="playMyGame(game.Id, game.Status, game.Creator)">{{ game.Status | gameActionFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</a></td>
                                 </tr>
                             </tbody>
                         </table>                               

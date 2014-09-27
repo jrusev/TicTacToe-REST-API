@@ -4,7 +4,12 @@ ticTacToeApp.filter('gameActionFilter', function () {
     return function (state, status) {
         switch (status.state) {
         case 0: // WaitingForSecondPlayer
-            return "Join"
+                
+            if (status.firstPlayerName === status.currentPlayerName)
+                return "";
+            else
+                return "Join";
+                
         case 1: // TurnX (first player)
             if (status.firstPlayerName === status.currentPlayerName)
                 return "Play";

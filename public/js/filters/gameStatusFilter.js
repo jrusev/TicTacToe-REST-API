@@ -4,7 +4,11 @@ ticTacToeApp.filter('gameStatusFilter', function () {
     return function (state, status) {
         switch (status.state) {
         case 0: // WaitingForSecondPlayer
-            return "Available"
+                
+            if (status.firstPlayerName === status.currentPlayerName)
+                return "Waiting";
+            else
+                return "Available";
         case 1: // TurnX (first player)
             if (status.firstPlayerName === status.currentPlayerName)
                 return "Your turn";
