@@ -5,7 +5,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
 
     //var url = 'http://localhost:4444';
     
-    function transformRequest(obj) {
+    function convertToQueryString(obj) {
         var str = [];
         for (var p in obj)
             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
@@ -17,7 +17,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
 
         $http.get(url + '/api/Games/' + type,
             {
-                transformRequest: transformRequest,
+                transformRequest: convertToQueryString,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'authorization': 'Bearer ' + access_token
@@ -43,7 +43,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
                     ConfirmPassword: password
                 },
                 {
-                    transformRequest: transformRequest,
+                    transformRequest: convertToQueryString,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
@@ -66,7 +66,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
                     grant_type: "password"
                 },
                 {
-                    transformRequest: transformRequest,
+                    transformRequest: convertToQueryString,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
@@ -125,7 +125,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
                     Name: gameName
                 },
                 {
-                    transformRequest: transformRequest,
+                    transformRequest: convertToQueryString,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'authorization': 'Bearer ' + access_token
@@ -147,7 +147,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
                     GameId: gameId
                 },
                 {
-                    transformRequest: transformRequest,
+                    transformRequest: convertToQueryString,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'authorization': 'Bearer ' + access_token
@@ -169,7 +169,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
                     GameId: gameId
                 },
                 {
-                    transformRequest: transformRequest,
+                    transformRequest: convertToQueryString,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'authorization': 'Bearer ' + access_token
@@ -193,7 +193,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
                     Col: col
                 },
                 {
-                    transformRequest: transformRequest,
+                    transformRequest: convertToQueryString,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'authorization': 'Bearer ' + access_token
