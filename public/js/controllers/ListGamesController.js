@@ -1,14 +1,20 @@
 'use strict';
 
 ticTacToeApp.controller('ListGamesController',
-    function ListGamesController($rootScope, $scope, $location, $window, ticTacToeData, auth) {
+    function ListGamesController($rootScope, $scope, $location, $window, $interval, ticTacToeData, auth) {
         if (!auth.isAuthenticated()) {
             $location.path('/login');
             return;
         }
-
+        
+        function startUpdating(delayMilliseconds, fn) {
+            var intervalId = $interval(fn, delayMilliseconds);            
+            $scope.$on('$destroy', function () {
+                $interval.cancel(intervalId);
+            });
+        }
+        
         $scope.currentPlayer = $rootScope.username;
-        $scope.allMyGames = [];
 
         // g.SecondPlayerId == userId && (g.State == TurnO || g.State == TurnX)
         function getJoinedGames() {
@@ -29,30 +35,43 @@ ticTacToeApp.controller('ListGamesController',
                     $scope.allMyGames = $scope.allMyGames.concat(data);
                 });
         }
-        
-        // g.FirstPlayerId == userId || (g.SecondPlayerId == userId && (g.State == WonByX || g.State == WonByO || g.State == Draw))
-        ticTacToeData
+
+        // g.FirstPlayerId == userId)
+        function getMyGames() {
+            ticTacToeData
             .getMyGames(auth.access_token())
             .then(function (data) {
                 $scope.allMyGames = $scope.allMyGames.concat(data);
             });
+        };
         
-        ticTacToeData
+        function getMyGamesHistory() {
+            ticTacToeData
             .getMyGamesHistory(auth.access_token())
             .then(function (data) {
                 $scope.myGamesHistory = data;
             });
-
-        getJoinedGames();
-        getAvailableGames();
+        };
+        
+        function updateGames() {
+            $scope.allMyGames = [];
+            getJoinedGames();
+            getAvailableGames();
+            getMyGames();        
+            getMyGamesHistory();
+        };
+        
+        updateGames();
+        
+//        startUpdating(5000, function() {
+//            console.log(".");
+//        });
         
         $scope.joinGame = function (gameId) {
             ticTacToeData
                 .joinGame(gameId, auth.access_token())
                 .then(function () {
-                    $scope.allMyGames = [];
-                    getJoinedGames();
-                    getAvailableGames();
+                    updateGames();
                 });
         };
         
