@@ -35,6 +35,10 @@ ticTacToeApp.controller('GameStatusController',
                             $scope.currentPlayer = $rootScope.username;
                             $scope.firstPlayer = data.FirstPlayerName;
                             $scope.secondPlayer = data.SecondPlayerName;
+                            $scope.opponent =
+                                data.FirstPlayerName == $rootScope.username ? data.SecondPlayerName : data.FirstPlayerName;
+                            $scope.mySign = data.FirstPlayerName == $rootScope.username ? 'X' : 'O';
+                            $scope.opponentSign = data.FirstPlayerName == $rootScope.username ? 'O' : 'X';
                         }
 
                         if (data.FirstPlayerName === $rootScope.username && data.State == 2 ||
