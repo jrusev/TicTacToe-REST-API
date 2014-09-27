@@ -115,6 +115,9 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
         getJoinedGames: function (access_token) {
             return getGames('JoinedGames', access_token);
         },
+        getMyGamesHistory: function (access_token) {
+            return getGames('MyGamesHistory', access_token);
+        },
         createGame: function (gameName, access_token) {
             var deferred = $q.defer();
 

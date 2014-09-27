@@ -1,7 +1,7 @@
 'use strict';
 
 ticTacToeApp.controller('LoginController',
-    function LoginController($rootScope, $scope, $resource, $location, ticTacToeData, auth) {
+    function LoginController($rootScope, $scope, $location, ticTacToeData, auth) {
         if (auth.isAuthenticated()) {
             $location.path('/');
             return;
