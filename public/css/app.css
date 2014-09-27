@@ -1,3 +1,7 @@
+.ios-btn {
+    text-decoration: none !important;
+}
+
 input.ng-dirty.ng-invalid {
     background-color: pink !important;
 }
