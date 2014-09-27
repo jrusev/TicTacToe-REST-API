@@ -19,10 +19,10 @@ ticTacToeApp.controller('RegistrationController',
                             $rootScope.username = auth.getUsername();
                             $location.path('/');
                         }, function (data) {
-                            ErrorModalWindow.showRestrictedAccessWindow("The request is invalid.", data.error_description);
+                            ModalDialog.show("The request is invalid.", data.error_description);
                         });
                 }, function (data) {
-                    ErrorModalWindow.showRestrictedAccessWindow(data.Message, data.ModelState[Object.keys(data.ModelState)[0]][0]);
+                    ModalDialog.show(data.Message, data.ModelState[Object.keys(data.ModelState)[0]][0]);
                 });
         }
     }

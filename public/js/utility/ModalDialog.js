@@ -1,4 +1,4 @@
-var ErrorModalWindow = (function () {
+var ModalDialog = (function () {
     function showRestrictedAccessWindow(headerMsg, bodyMsg) {
         $('#myModalLabel').html(headerMsg);
         $('#myModalLabeBody').html(bodyMsg);
@@ -6,6 +6,6 @@ var ErrorModalWindow = (function () {
     }
 
     return {
-        showRestrictedAccessWindow: showRestrictedAccessWindow
+        show: showRestrictedAccessWindow
     }
 }());

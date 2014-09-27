@@ -80,6 +80,26 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
 
             return deferred.promise;
         },
+        logout: function(access_token) {            
+            var deferred = $q.defer();
+            
+            $http.post(url + '/api/Account/Logout', {},
+                {
+                    transformRequest: convertToQueryString,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'authorization': 'Bearer ' + access_token
+                    }
+                })
+                .success(function (data) {                    
+                    deferred.resolve(data);
+                })
+                .error(function (data) {
+                    deferred.reject(data);
+                });
+
+            return deferred.promise;            
+        },
         getUsers: function () {
             var deferred = $q.defer();
 
