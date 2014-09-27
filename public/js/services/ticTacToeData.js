@@ -1,9 +1,9 @@
 'use strict';
 
-ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
-    var url = 'http://tictactoe-services.azurewebsites.net/';
+ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
+    var url = baseServiceUrl;
 
-    //var url = 'http://localhost:4444/';
+    //var url = 'http://localhost:4444';
     
     function transformRequest(obj) {
         var str = [];
@@ -15,7 +15,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
     function getGames(type, access_token) {
         var deferred = $q.defer();
 
-        $http.get(url + 'api/Games/' + type,
+        $http.get(url + '/api/Games/' + type,
             {
                 transformRequest: transformRequest,
                 headers: {
@@ -37,7 +37,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
         register: function (username, password) {
             var deferred = $q.defer();
 
-            $http.post(url + 'api/Account/Register', {
+            $http.post(url + '/api/Account/Register', {
                     Username: username,
                     Password: password,
                     ConfirmPassword: password
@@ -60,7 +60,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
         login: function (username, password) {
             var deferred = $q.defer();
 
-            $http.post(url + 'Token', {
+            $http.post(url + '/Token', {
                     username: username,
                     password: password,
                     grant_type: "password"
@@ -83,7 +83,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
         getUsers: function () {
             var deferred = $q.defer();
 
-            $http.get(url + 'api/Users/All')
+            $http.get(url + '/api/Users/All')
                 .success(function (data) {
                     deferred.resolve(data);
                 })
@@ -96,7 +96,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
         getScores: function () {
             var deferred = $q.defer();
 
-            $http.get(url + 'api/Scores/Top')
+            $http.get(url + '/api/Scores/Top')
                 .success(function (data) {
                     deferred.resolve(data);
                 })
@@ -121,7 +121,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
         createGame: function (gameName, access_token) {
             var deferred = $q.defer();
 
-            $http.post(url + 'api/Games/Create', {
+            $http.post(url + '/api/Games/Create', {
                     Name: gameName
                 },
                 {
@@ -143,7 +143,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
         joinGame: function (gameId, access_token) {
             var deferred = $q.defer();
 
-            $http.post(url + 'api/Games/Join', {
+            $http.post(url + '/api/Games/Join', {
                     GameId: gameId
                 },
                 {
@@ -165,7 +165,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
         getGameStatus: function (gameId, access_token) {
             var deferred = $q.defer();
 
-            $http.post(url + 'api/Games/Status', {
+            $http.post(url + '/api/Games/Status', {
                     GameId: gameId
                 },
                 {
@@ -187,7 +187,7 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q) {
         playGame: function (gameId, row, col, access_token) {
             var deferred = $q.defer();
 
-            $http.post(url + 'api/Games/Play', {
+            $http.post(url + '/api/Games/Play', {
                     GameId: gameId,
                     Row: row,
                     Col: col

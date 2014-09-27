@@ -32,4 +32,5 @@ var ticTacToeApp = angular.module('myApp', ['ngResource', 'ngRoute'])
             .otherwise({redirectTo: '/'});
     })
     .constant('author', 'JR')
-    .constant('copyright', 'Telerik Academy');
+    .constant('copyright', 'Telerik Academy')
+    .constant('baseServiceUrl', 'http://tictactoe-services.azurewebsites.net');
