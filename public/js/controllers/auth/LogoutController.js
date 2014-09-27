@@ -2,10 +2,6 @@
 
 ticTacToeApp.controller('LogoutController',
     function LogoutController($rootScope, $scope, $resource, $location, ticTacToeData, auth, notifier) {
-        if (!auth.isAuthenticated()) {
-            $location.path('/');
-            return;
-        }
         
         $scope.logout = function () {            
             ticTacToeData.logout(auth.access_token())
