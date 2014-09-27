@@ -27,7 +27,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="game in allMyGames">
+                                <tr ng-repeat="game in allMyGames | orderBy: '-DateCreated'">
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ game.Name }}</td>
                                     <td>{{ game.Creator }}</td>
