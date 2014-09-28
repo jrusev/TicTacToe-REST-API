@@ -13,7 +13,6 @@ ticTacToeApp.controller('MainPageController',
             $scope.toggleFooterText = $scope.showFooter ? 'Hide footer' : 'Show footer';
         }
         
-        $scope.showFooter = true;
         $scope.toggleFooter();
     }
 );
