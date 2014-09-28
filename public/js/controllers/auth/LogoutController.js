@@ -6,13 +6,15 @@ ticTacToeApp.controller('LogoutController',
         $scope.logout = function () {            
             ticTacToeData.logout(auth.access_token())
                 .then(function () {
-                    notifier.success('Logout successful!');
-                    auth.logout();                    
-                    $rootScope.isLoggedIn = false;
-                    $location.path('/login');                    
+                    notifier.success('Logout successful!');           
                 }, function (data) {
-                    ModalDialog.show("The request is invalid.", data.error_description);
+                    ModalDialog.show("The request is invalid.", data.Message);
                 });
+            
+                // log out even if request fails
+                auth.logout();                    
+                $rootScope.isLoggedIn = false;
+                $location.path('/login'); 
         }
     }
 );

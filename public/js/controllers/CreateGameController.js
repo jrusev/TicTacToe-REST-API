@@ -12,7 +12,10 @@ ticTacToeApp.controller('CreateGameController',
                 .then(function () {
                     notifier.success('Game created!');
                     $location.path('/');
-                });
-        };
+                },
+                 function (data){
+                    ModalDialog.show("The request is invalid.", data.Message);
+                 });
+        };        
     }
 );
