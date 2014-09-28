@@ -31,5 +31,5 @@ var ticTacToeApp = angular.module('myApp', ['ngResource', 'ngRoute'])
             })
             .otherwise({redirectTo: '/'});
     })
-    .value('toastr', toastr)
+    .constant('toastr', toastr)
     .constant('baseServiceUrl', 'http://tic-tac-toe-webapp.apphb.com');

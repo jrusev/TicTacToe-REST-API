@@ -14,6 +14,15 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
 
     function getGames(type, access_token) {
         var deferred = $q.defer();
+        
+//        if (page && category)
+//            articlesApi += '?page=' + page + '&category=' + category
+//
+//        if (page) 
+//            articlesApi += '?page=' + page
+//
+//        if (category)
+//            articlesApi += '?category=' + category
 
         $http.get(url + '/api/Games/' + type,
             {
