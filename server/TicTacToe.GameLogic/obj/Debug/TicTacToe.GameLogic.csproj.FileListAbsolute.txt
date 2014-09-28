@@ -1,4 +1,0 @@
-C:\Users\JR\Dropbox\GitHub\Tic-Tac-Toe-RestAPI\server\TicTacToe.GameLogic\bin\Debug\TicTacToe.GameLogic.dll
-C:\Users\JR\Dropbox\GitHub\Tic-Tac-Toe-RestAPI\server\TicTacToe.GameLogic\bin\Debug\TicTacToe.GameLogic.pdb
-C:\Users\JR\Dropbox\GitHub\Tic-Tac-Toe-RestAPI\server\TicTacToe.GameLogic\obj\Debug\TicTacToe.GameLogic.dll
-C:\Users\JR\Dropbox\GitHub\Tic-Tac-Toe-RestAPI\server\TicTacToe.GameLogic\obj\Debug\TicTacToe.GameLogic.pdb

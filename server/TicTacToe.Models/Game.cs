@@ -42,8 +42,14 @@
 
         public virtual ICollection<Score> Scores
         {
-            get { return this.score; }
-            set { this.score = value; }
+            get
+            {
+                return this.score;
+            }
+            set
+            {
+                this.score = value;
+            }
         }
     }
 }

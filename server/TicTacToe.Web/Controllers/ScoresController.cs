@@ -6,6 +6,7 @@
     using System.Web.Http;
     using TicTacToe.Data.Contracts;
     using TicTacToe.Data.UnitOfWork;
+    using TicTacToe.Models;
     using TicTacToe.Web.DataModels;
 
     public class ScoresController : BaseApiController
@@ -35,14 +36,16 @@
 
             foreach (var user in users)
             {
-                var wins = this.Data.Scores.All().Count(s => s.PlayerId.ToString() == user.Id && s.IsWin);
-                var losses = this.Data.Scores.All().Count(s => s.PlayerId.ToString() == user.Id && !s.IsWin);
+                var wins = this.Data.Scores.All().Count(s => s.PlayerId.ToString() == user.Id && s.ScoreStatus == ScoreStatus.Win);
+                var losses = this.Data.Scores.All().Count(s => s.PlayerId.ToString() == user.Id && s.ScoreStatus == ScoreStatus.Loss);
+                var draws = this.Data.Scores.All().Count(s => s.PlayerId.ToString() == user.Id && s.ScoreStatus == ScoreStatus.Draw);
                 scores.Add(new ScoreInfoDataModel()
                 {
                     Wins = wins,
                     Losses = losses,
+                    Draws = draws,
                     Username = user.Username,
-                    Points = 100 * wins + 15 * losses
+                    Points = 100 * wins + 30 * draws + 15 * losses
                 });
             }
 

@@ -10,6 +10,8 @@ namespace TicTacToe.Web.DataModels
 
         public int Losses { get; set; }
 
+        public int Draws { get; set; }
+
         public int Points { get; set; }
     }
 }

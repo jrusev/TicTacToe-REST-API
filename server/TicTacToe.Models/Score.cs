@@ -10,6 +10,7 @@
         [Key]
         public int ScoreId { get; set; }
 
+        [Obsolete("Use ScoreStatus")]
         public bool IsWin { get; set; }
 
         [ForeignKey("Game")]
@@ -19,5 +20,7 @@
 
         [Required]
         public Guid PlayerId { get; set; }
+
+        public ScoreStatus ScoreStatus { get; set; }
     }
 }

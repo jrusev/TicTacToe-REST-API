@@ -1,5 +1,0 @@
-C:\Users\JR\Dropbox\GitHub\Tic-Tac-Toe-RestAPI\server\TicTacToe.Common\bin\Debug\TicTacToe.Common.dll
-C:\Users\JR\Dropbox\GitHub\Tic-Tac-Toe-RestAPI\server\TicTacToe.Common\bin\Debug\TicTacToe.Common.pdb
-C:\Users\JR\Dropbox\GitHub\Tic-Tac-Toe-RestAPI\server\TicTacToe.Common\obj\Debug\TicTacToe.Common.csprojResolveAssemblyReference.cache
-C:\Users\JR\Dropbox\GitHub\Tic-Tac-Toe-RestAPI\server\TicTacToe.Common\obj\Debug\TicTacToe.Common.dll
-C:\Users\JR\Dropbox\GitHub\Tic-Tac-Toe-RestAPI\server\TicTacToe.Common\obj\Debug\TicTacToe.Common.pdb

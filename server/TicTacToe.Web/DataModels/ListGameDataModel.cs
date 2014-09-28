@@ -16,6 +16,7 @@
                     Id = game.GameId,
                     Name = game.Name,
                     Creator = game.FirstPlayer.UserName,
+                    Opponent = game.SecondPlayer.UserName,
                     DateCreated = game.DateCreated,
                     Status = game.State
                 };
@@ -27,6 +28,8 @@
         public string Name { get; set; }
 
         public string Creator { get; set; }
+
+        public string Opponent { get; set; }
 
         public GameState Status { get; set; }
 

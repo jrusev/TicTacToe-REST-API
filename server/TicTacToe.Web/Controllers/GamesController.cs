@@ -29,12 +29,33 @@
         [Authorize]
         public IQueryable<ListGameDataModel> MyGames()
         {
+            var fromDate = DateTime.Now.AddDays(-0.5);
+
+            var userId = this.userInfoProvider.GetUserId();
+            var games = this.Data.Games
+                            .All()
+                            .Where(g => (g.FirstPlayerId == userId &&
+                                         g.DateCreated >= fromDate &&
+                                         (g.State == GameState.TurnO ||
+                                          g.State == GameState.TurnX ||
+                                          g.State == GameState.WaitingForSecondPlayer)))
+                            .Select(ListGameDataModel.FromGame);
+            return games;
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IQueryable<ListGameDataModel> MyGamesHistory()
+        {
             var userId = this.userInfoProvider.GetUserId();
             var games = this.Data.Games
                             .All()
                             .Where(g => (g.FirstPlayerId == userId ||
-                                         (g.SecondPlayerId == userId && g.State != GameState.TurnO &&
-                                          g.State != GameState.TurnX && g.State != GameState.WaitingForSecondPlayer)))
+                                         g.SecondPlayerId == userId) &&
+                                        (g.State == GameState.WonByX ||
+                                         g.State == GameState.WonByO ||
+                                         g.State == GameState.Draw))
+                            .OrderByDescending(g => g.DateCreated)
                             .Select(ListGameDataModel.FromGame);
             return games;
         }
@@ -43,10 +64,14 @@
         [Authorize]
         public IQueryable<ListGameDataModel> JoinedGames()
         {
+            var fromDate = DateTime.Now.AddDays(-0.5);
+
             var userId = this.userInfoProvider.GetUserId();
             var games = this.Data.Games
                             .All()
-                            .Where(g => g.SecondPlayerId == userId && (g.State == GameState.TurnO || g.State == GameState.TurnX))
+                            .Where(g => g.SecondPlayerId == userId &&
+                                        g.DateCreated >= fromDate &&
+                                        (g.State == GameState.TurnO || g.State == GameState.TurnX))
                             .Select(ListGameDataModel.FromGame);
             return games;
         }
@@ -55,10 +80,14 @@
         [Authorize]
         public IQueryable<ListGameDataModel> AvailableGames()
         {
+            var fromDate = DateTime.Now.AddDays(-0.5);
+
             var userId = this.userInfoProvider.GetUserId();
             var games = this.Data.Games
                             .All()
-                            .Where(g => g.State == GameState.WaitingForSecondPlayer && g.FirstPlayerId != userId)
+                            .Where(g => g.State == GameState.WaitingForSecondPlayer &&
+                                        g.DateCreated >= fromDate &&
+                                        g.FirstPlayerId != userId)
                             .OrderByDescending(g => g.DateCreated)
                             .Select(ListGameDataModel.FromGame);
             return games;
@@ -102,7 +131,7 @@
             }
 
             game.SecondPlayerId = currentUserId;
-            game.State = GameState.TurnX;
+            game.State = this.GetRandomPlayerTurn();
             this.Data.SaveChanges();
 
             return this.Ok();
@@ -133,13 +162,13 @@
             var gameInfo = this.Data.Games.All()
                                .Where(g => g.GameId == idAsGuid)
                                .Select(g => new GameInfoDataModel()
-                                      {
-                                          Board = g.Board,
-                                          Id = g.GameId,
-                                          State = g.State,
-                                          FirstPlayerName = g.FirstPlayer.UserName,
-                                          SecondPlayerName = g.SecondPlayer.UserName,
-                                      })
+                               {
+                                   Board = g.Board,
+                                   Id = g.GameId,
+                                   State = g.State,
+                                   FirstPlayerName = g.FirstPlayer.UserName,
+                                   SecondPlayerName = g.SecondPlayer.UserName,
+                               })
                                .FirstOrDefault();
 
             return this.Ok(gameInfo);
@@ -200,7 +229,7 @@
 
             return this.Ok();
         }
- 
+
         private void ChangeGameState(GameResult gameResult, Game game)
         {
             switch (gameResult)
@@ -208,8 +237,8 @@
                 case GameResult.WonByX:
                     {
                         game.State = GameState.WonByX;
-                        this.AddToScore(game, game.FirstPlayerId, true);
-                        this.AddToScore(game, game.SecondPlayerId, false);
+                        this.AddToScore(game, game.FirstPlayerId, ScoreStatus.Win);
+                        this.AddToScore(game, game.SecondPlayerId, ScoreStatus.Loss);
 
                         this.Data.SaveChanges();
                         break;
@@ -217,8 +246,8 @@
                 case GameResult.WonByO:
                     {
                         game.State = GameState.WonByO;
-                        this.AddToScore(game, game.FirstPlayerId, false);
-                        this.AddToScore(game, game.SecondPlayerId, true);
+                        this.AddToScore(game, game.FirstPlayerId, ScoreStatus.Loss);
+                        this.AddToScore(game, game.SecondPlayerId, ScoreStatus.Win);
 
                         this.Data.SaveChanges();
                         break;
@@ -226,20 +255,28 @@
                 case GameResult.Draw:
                     {
                         game.State = GameState.Draw;
+                        this.AddToScore(game, game.FirstPlayerId, ScoreStatus.Draw);
+                        this.AddToScore(game, game.SecondPlayerId, ScoreStatus.Draw);
+
                         this.Data.SaveChanges();
                         break;
                     }
             }
         }
- 
-        private void AddToScore(Game game, string playerId, bool isWin)
+
+        private void AddToScore(Game game, string playerId, ScoreStatus scoreStatus)
         {
             this.Data.Scores.Add(new Score()
             {
                 GameId = game.GameId,
                 PlayerId = Guid.Parse(playerId),
-                IsWin = isWin
+                ScoreStatus = scoreStatus
             });
+        }
+
+        private GameState GetRandomPlayerTurn()
+        {
+            return DateTime.Now.Millisecond % 2 == 0 ? GameState.TurnX : GameState.TurnO;
         }
     }
 }
