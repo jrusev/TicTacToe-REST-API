@@ -1,8 +1,3 @@
-## Single-Page-Applications with AngularJS
+## Tic-Tac-Toe game
 
-1. Create AngularJS SPA client for the ```Tic-Tac-Toe Web API``` project used in the "Web Services and Cloud" course in lecture "Web API Architecture"
-    * Use **routing** - for every single page
-    * Use **controllers** - games, users, playing, etc.
-    * Use **services** - restful usage, game logic, etc.
-    * Use **filters** - for visualization of the bindings
-    * Use **directives** - for domain specific parts of the HTML
+The game is a single-page web application that uses a RESTful service. The client is powered by AngularJS, and the service uses ASP.NET Web API.

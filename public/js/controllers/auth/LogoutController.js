@@ -11,7 +11,7 @@ ticTacToeApp.controller('LogoutController',
                     ModalDialog.show("The request is invalid.", data.Message);
                 });
             
-                // log out even if request fails
+                // log out even if request fails, so user can login
                 auth.logout();                    
                 $rootScope.isLoggedIn = false;
                 $location.path('/login'); 
