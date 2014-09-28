@@ -6,6 +6,14 @@ ticTacToeApp.controller('MainPageController',
         if (auth.isAuthenticated()) {
             $rootScope.isLoggedIn = true;
             $rootScope.username = auth.getUsername();
+        }        
+        
+        $scope.toggleFooter = function toggleFooter() {
+            $scope.showFooter = !$scope.showFooter;
+            $scope.toggleFooterText = $scope.showFooter ? 'Hide footer' : 'Show footer';
         }
+        
+        $scope.showFooter = true;
+        $scope.toggleFooter();
     }
 );
