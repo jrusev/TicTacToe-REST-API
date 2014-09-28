@@ -11,6 +11,10 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
         return str.join("&");
     };
+    
+    function getAuthHeader(access_token) {
+        return { 'Authorization': 'Bearer ' + access_token };
+    };
 
     function getGames(type, access_token) {
         var deferred = $q.defer();
@@ -23,15 +27,8 @@ ticTacToeApp.factory('ticTacToeData', function ($http, $q, baseServiceUrl) {
 //
 //        if (category)
 //            articlesApi += '?category=' + category
-
-        $http.get(url + '/api/Games/' + type,
-            {
-                transformRequest: convertToQueryString,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'authorization': 'Bearer ' + access_token
-                }
-            })
+        
+        $http.get(url + '/api/Games/' + type, { headers: getAuthHeader(access_token) })
             .success(function (data) {
                 deferred.resolve(data);
             })
