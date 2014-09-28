@@ -56,7 +56,7 @@
                                     <td>{{ game.Name }}</td>
                                     <td>{{ game.Creator }}</td>
                                     <td>{{ game.DateCreated | date : 'd MMM, HH:mm' }}</td>
-                                    <td>{{ game.Status | gameStatusFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</td>
+                                    <td><a href="#/game/{{game.Id}}">{{ game.Status | gameStatusFilter:{state:game.Status, firstPlayerName:game.Creator, currentPlayerName: currentPlayer} }}</a></td>
                                 </tr>
                             </tbody>
                         </table>                        
